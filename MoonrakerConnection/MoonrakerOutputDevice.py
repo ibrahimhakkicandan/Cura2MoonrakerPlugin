@@ -6,6 +6,7 @@ from enum import Enum
 from io import BytesIO, StringIO
 from typing import cast
 from time import sleep
+import base64
 
 USE_QT5 = False
 try:
@@ -441,6 +442,15 @@ class MoonrakerOutputDevice(PrinterOutputDevice):
         if self._apiKey:
             headers['X-API-Key'] = self._apiKey
 
+	# Optional Basic Authentication (to use uncomment below 5 lines and give proper username and password)   
+	
+        #username = "your_username"
+        #password = "your_password"
+        #auth_string = f"{username}:{password}"
+        #auth_encoded = base64.b64encode(auth_string.encode('utf-8')).decode('utf-8')
+        #headers['Authorization'] = f"Basic {auth_encoded}"
+
+	    
         postData = data
         requestManager = CuraApplication.getInstance().getHttpRequestManager()
         if data is not None:
